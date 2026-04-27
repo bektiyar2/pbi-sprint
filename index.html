@@ -3,218 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Power BI 20-Day Sprint Tracker</title>
+    <title>Power BI 20-Day Dashboard</title>
     <style>
         :root {
             --pbi-yellow: #f2c811;
-            --pbi-dark: #252423;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --card-bg: #ffffff;
+            --pbi-dark: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text: #e0e0e0;
+            --accent: #4CAF50;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-        }
-        header {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             background-color: var(--pbi-dark);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: var(--text);
+            margin: 0; padding: 20px;
+            display: flex; justify-content: center;
         }
-        h1 { margin: 0; font-size: 1.5rem; }
-        .progress-box {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .progress-bar {
-            height: 12px;
-            background: #eee;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        #progress-fill {
-            height: 100%;
-            background: var(--pbi-yellow);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-        .week-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--pbi-yellow);
-        }
-        .week-header {
-            background: #f1f1f1;
-            padding: 10px 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        .task {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .task:last-child { border-bottom: none; }
-        .task:hover { background: #fafafa; }
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            accent-color: var(--pbi-yellow);
-            cursor: pointer;
-        }
-        .task-label { flex: 1; font-size: 0.95rem; }
-        .completed .task-label {
-            text-decoration: line-through;
-            color: #999;
-        }
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #999;
-        }
+        .container { width: 100%; max-width: 700px; }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--pbi-yellow); padding-bottom: 10px; }
+        h1 { color: var(--pbi-yellow); margin: 0; }
+        
+        .section { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        h2 { font-size: 1.2rem; color: var(--pbi-yellow); margin-top: 0; display: flex; align-items: center; justify-content: space-between; }
+        
+        .schedule-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #444; font-size: 0.9rem; }
+        .time { color: var(--pbi-yellow); font-weight: bold; width: 100px; }
+        .activity { flex: 1; }
+
+        .progress-bar { background: #444; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; }
+        #progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+
+        .task-list { margin-top: 10px; }
+        .task { display: flex; align-items: center; padding: 10px; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .task:hover { background: #383838; }
+        input[type="checkbox"] { margin-right: 15px; transform: scale(1.2); accent-color: var(--pbi-yellow); }
+        .completed { text-decoration: line-through; color: #888; }
+        
+        .week-tag { font-size: 0.7rem; background: #444; padding: 3px 8px; border-radius: 10px; color: #bbb; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Power BI 20-Day Sprint</h1>
-            <p style="margin:5px 0 0; opacity:0.8; font-size:0.8rem;">Трекер для Бектияра</p>
+            <h1>BEKTIYAR'S POWER BI SPRINT</h1>
+            <p>20 дней до уровня Pro</p>
         </header>
 
-        <div class="progress-box">
-            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:0.9rem;">
-                <span>Твой прогресс</span>
-                <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div id="progress-fill"></div>
-            </div>
+        <div class="section">
+            <h2>📅 Распорядок дня</h2>
+            <div class="schedule-item"><span class="time">07:45 - 08:30</span><span class="activity">Утренняя ходьба + чтение "Адамзаттың асыл тәжі"</span></div>
+            <div class="schedule-item" style="background: #3d3d3d; border-radius: 4px;"><span class="time">08:30 - 11:30</span><span class="activity"><b>Интенсив Power BI (Обучение)</b></span></div>
+            <div class="schedule-item"><span class="time">11:30 - 13:00</span><span class="activity">Поиск работы (LinkedIn / GitHub)</span></div>
+            <div class="schedule-item"><span class="time">13:00 - 14:00</span><span class="activity">Обед и отдых</span></div>
+            <div class="schedule-item" style="background: #3d3d3d; border-radius: 4px;"><span class="time">14:00 - 16:00</span><span class="activity">Закрепление темы / Практика (ДЗ)</span></div>
+            <div class="schedule-item"><span class="time">16:00 - 18:00</span><span class="activity">Интервью / Тестовые задания</span></div>
+            <div class="schedule-item"><span class="time">18:00 - 20:00</span><span class="activity">Личное время / Семья</span></div>
+            <div class="schedule-item"><span class="time">20:00 - 21:00</span><span class="activity">Threads / Рефлексия</span></div>
         </div>
 
-        <div id="tasks-container"></div>
-
-        <div class="footer">
-            Сохраняется автоматически в браузере.<br>
-            Удачи, Бектияр! Только вперед.
+        <div class="section">
+            <h2>🚀 Прогресс курса <span id="percent">0%</span></h2>
+            <div class="progress-bar"><div id="progress-fill"></div></div>
+            <div id="course-list" class="task-list"></div>
         </div>
     </div>
 
     <script>
         const plan = [
-            { week: "Неделя 1: ETL & Power Query", tasks: [
-                "День 01: Установка, интерфейс и импорт (Excel, CSV, SQL, 1С)",
-                "День 02: Трансформация строк, столбцов и текста в Power Query",
-                "День 03: Настраиваемые столбцы и нестандартные преобразования",
-                "День 04: Связи (Merge/Append) и создание календаря в PQ",
-                "День 05: Контрольная точка: Сборка первого отчета (Уровень 1)"
-            ]},
-            { week: "Неделя 2: Моделирование и Базовый DAX", tasks: [
-                "День 06: Архитектура модели данных и переменные в DAX",
-                "День 07: Меры против вычисляемых столбцов. Агрегаторы",
-                "День 08: CALCULATE, FILTER и Контексты (Важно!)",
-                "День 09: Логика SWITCH, RELATED и управление фильтрами ALL",
-                "День 10: Аудит модели, поиск ошибок и оптимизация"
-            ]},
-            { week: "Неделя 3: Аналитика во времени (Time Intelligence)", tasks: [
-                "День 11: Анализ YTD, SPLY и сравнение YoY/MoM",
-                "День 12: DATEADD и накопительный итог",
-                "День 13: Анализ долей, рейтинги (RANKX) и вложенные меры",
-                "День 14: KPI, целевые показатели и динамика",
-                "День 15: Марафон DAX: Сборка всех формул в блок"
-            ]},
-            { week: "Неделя 4: Визуализация и Финал", tasks: [
-                "День 16: Дизайн чартов, карточки KPI и композиция",
-                "День 17: Матрицы, детализация (Drill-through) и срезы",
-                "День 18: Интерактив: кнопки, закладки и Tooltips",
-                "День 19: Кастомизация тем, единый стиль и UX",
-                "День 20: ФИНАЛ: Защита проекта и портфолио"
-            ]}
+            { week: "ETL", day: "01", t: "Установка, интерфейс и импорт (Excel, CSV, SQL, 1С)" },
+            { week: "ETL", day: "02", t: "Трансформация строк, столбцов и текста в PQ" },
+            { week: "ETL", day: "03", t: "Настраиваемые столбцы и преобразования" },
+            { week: "ETL", day: "04", t: "Связи (Merge/Append) и Календарь" },
+            { week: "ETL", day: "05", t: "ФИНАЛ УРОВНЯ 1: Сборка отчета" },
+            { week: "DAX", day: "06", t: "Архитектура модели и переменные DAX" },
+            { week: "DAX", day: "07", t: "Меры vs Столбцы. Агрегаторы" },
+            { week: "DAX", day: "08", t: "CALCULATE, FILTER и Контексты (КРИТИЧНО)" },
+            { week: "DAX", day: "09", t: "Логика SWITCH, RELATED и фильтры ALL" },
+            { week: "DAX", day: "10", t: "Аудит модели и оптимизация" },
+            { week: "TIME", day: "11", t: "Анализ YTD, SPLY и сравнение YoY/MoM" },
+            { week: "TIME", day: "12", t: "DATEADD и накопительный итог" },
+            { week: "TIME", day: "13", t: "Анализ долей, рейтинги и вложенные меры" },
+            { week: "TIME", day: "14", t: "KPI и динамическое оформление" },
+            { week: "TIME", day: "15", t: "МАРАФОН DAX: Сборка всех формул" },
+            { week: "VIZ", day: "16", t: "Дизайн чартов и композиция дашборда" },
+            { week: "VIZ", day: "17", t: "Матрицы, Drill-through и срезы" },
+            { week: "VIZ", day: "18", t: "Кнопки, закладки и Tooltips" },
+            { week: "VIZ", day: "19", t: "Кастомизация тем и UX" },
+            { week: "VIZ", day: "20", t: "ИТОГОВЫЙ ПРОЕКТ В ПОРТФОЛИО" }
         ];
 
-        const container = document.getElementById('tasks-container');
-        const storageKey = 'pbi_sprint_data';
-        let savedData = JSON.parse(localStorage.getItem(storageKey)) || {};
+        const list = document.getElementById('course-list');
+        const storageKey = 'bektiyar_pbi_data';
+        let saved = JSON.parse(localStorage.getItem(storageKey)) || {};
 
-        function save() {
-            localStorage.setItem(storageKey, JSON.stringify(savedData));
-            updateProgress();
+        function update() {
+            const total = plan.length;
+            const done = document.querySelectorAll('input:checked').length;
+            const p = Math.round((done/total)*100);
+            document.getElementById('progress-fill').style.width = p+'%';
+            document.getElementById('percent').innerText = p+'%';
+            localStorage.setItem(storageKey, JSON.stringify(saved));
         }
 
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            const checked = document.querySelectorAll('input[type="checkbox"]:checked');
-            const percent = Math.round((checked.length / checkboxes.length) * 100);
-            document.getElementById('progress-fill').style.width = percent + '%';
-            document.getElementById('progress-percent').innerText = percent + '%';
-        }
-
-        plan.forEach((w, wIdx) => {
-            const card = document.createElement('div');
-            card.className = 'week-card';
-            
-            const header = document.createElement('div');
-            header.className = 'week-header';
-            header.innerText = w.week;
-            card.appendChild(header);
-
-            w.tasks.forEach((t, tIdx) => {
-                const id = `t-${wIdx}-${tIdx}`;
-                const taskDiv = document.createElement('div');
-                taskDiv.className = 'task' + (savedData[id] ? ' completed' : '');
-                
-                const cb = document.createElement('input');
-                cb.type = 'checkbox';
-                cb.id = id;
-                cb.checked = !!savedData[id];
-                cb.onchange = (e) => {
-                    savedData[id] = e.target.checked;
-                    taskDiv.classList.toggle('completed', e.target.checked);
-                    save();
-                };
-
-                const label = document.createElement('div');
-                label.className = 'task-label';
-                label.innerText = t;
-                
-                taskDiv.onclick = (e) => {
-                    if(e.target !== cb) cb.click();
-                };
-
-                taskDiv.appendChild(cb);
-                taskDiv.appendChild(label);
-                card.appendChild(taskDiv);
-            });
-            container.appendChild(card);
+        plan.forEach((item, i) => {
+            const id = 'day-'+i;
+            const div = document.createElement('div');
+            div.className = 'task' + (saved[id] ? ' completed' : '');
+            div.innerHTML = `
+                <input type="checkbox" id="${id}" ${saved[id]?'checked':''}>
+                <div style="flex:1">
+                    <span class="week-tag">${item.week}</span> 
+                    <strong>День ${item.day}:</strong> ${item.t}
+                </div>
+            `;
+            div.onclick = (e) => {
+                const cb = div.querySelector('input');
+                if(e.target !== cb) cb.click();
+                saved[id] = cb.checked;
+                div.classList.toggle('completed', cb.checked);
+                update();
+            };
+            list.appendChild(div);
         });
-
-        updateProgress();
+        update();
     </script>
 </body>
 </html>
